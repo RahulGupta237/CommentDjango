@@ -1,0 +1,138 @@
+{% extends 'UserApp/base.html' %} {% block content %}
+
+<style>
+    .success {
+        color: green;
+        font-size: medium;
+    }
+</style>
+
+<header style="color: blue;">
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <!-- Navbar content -->
+        <a class="btn btn-primary" href="{% url 'LogOut' %}">LogOut</a>
+
+
+        <h4>TodoList Dashboard</h4>
+
+
+
+
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{request.user.name}}
+    </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'Edit' %}">Edit profile</a>
+                <a class="dropdown-item" href="{% url 'Profile' %}">Home</a>
+
+                <a class="dropdown-item" href="{% url 'create' %}">Create new Todolist</a>
+                <a class="dropdown-item" href="{% url 'List_todo' %}">Views todolist</a>
+                <a class="dropdown-item" href="{% url 'items' %}">Create Items todolist</a>
+                <a class="dropdown-item" href="{% url 'items_todo' %}">Views Items todolist</a>
+
+
+                <a class="dropdown-item" href="{% url 'LogOut' %}">Logout</a>
+
+            </div>
+        </div>
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="col-sm-10">
+    <h1 class="text-white my-5">Dashboard Page</h1>
+    <a href="{% url 'create' %}" class="btn btn-success">Add Todolist</a>
+    <h4 class="text-center alert alert-info mt-3">Show Todolist information</h4>
+    {% if messages %} {% for msg in messages %}
+    <small {% if msg.tags %} class="{{msg.tags}}" {% endif %}>{{msg}}</small> {% endfor %} {% endif %} {% if todo_items %}
+    <table class="table table-hover bg-light background-color rounded-circle">
+
+        <thead>
+            <tr class="text-center">
+                <th scope="col" style="width:2%;">ID</th>
+                <th scope="col" style="width:2%;">Title</th>
+                <th scope="col" style="width:2%;">Description</th>
+                <th scope="col" style="width:2%;">is_active</th>
+
+                <th scope="col" style="width:2%;">Status</th>
+                <th scope="col" style="width:2%;">Action</th>
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for i in todo_items %}
+            <tr>
+                <th scope="row">{{i.id}}</th>
+                <td>{{i.title}}</td>
+                <td>{{i.description}}</td>
+                <td> {% if i.is_active %}<span style="color: green;">&#10004;</span>
+                    <i class="fas fa-check-circle text-success text-green my-5"></i> {% else %}
+                    <span style="color: red;"> &#10060</span>;
+                    <i class="far fa-circle"></i> {% endif %}
+
+                </td>
+                <td>{{i.status}}</td>
+                <td class="text-center">
+                    <a href="{% url 'EditTodo' i.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <form id="delete-form" action="{% url 'DeleteTodo' i.id %}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <input type="submit" id="delete-button" class="btn btn-danger btn-sm" value="delete"> {% if request.user.is_staff %} {% if i.is_active %}
+                        <a href="{% url 'activate' i.id %}" class="btn btn-warning btn-sm">Reopen</a> {% else %}
+                        <a href="{% url 'activate' i.id %}" class="btn btn-warning btn-sm">Active</a> {% endif %} {% endif%}
+
+
+                    </form>
+                </td>
+
+
+
+
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+    {% endif %}
+
+
+
+</div>
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#delete-button').click(function(event) {
+            event.preventDefault();
+            // Show confirmation dialog
+            var confirmed = confirm(`Are you sure you want to delete! `, 'background:#FF0000; color: white; font-size: 24px; padding: 10px; border-radius: 5px;');
+            if (!confirmed) {
+                console.log('User cancelled the deletion', 'color: yellow; font-size: 24px;');
+                return;
+            }
+            // Submit the form to delete the item
+            $('#delete-form').submit();
+        });
+    });
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+{% endblock %}

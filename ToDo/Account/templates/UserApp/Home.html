@@ -1,0 +1,151 @@
+ {% extends 'UserApp/base.html' %} {% block content %}
+
+<style>
+    .success {
+        color: green;
+        font-size: medium;
+    }
+</style>
+
+<header style="color: blue;">
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <!-- Navbar content -->
+        <a class="btn btn-primary" href="{% url 'LogOut' %}">LogOut</a>
+
+
+        <h4>This application under working all django functionality come in future</h4>
+
+
+
+
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{name}}
+    </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'Edit' %}">Edit profile</a>
+                <a class="dropdown-item" href="{% url 'SignUp' %}">Create new account</a>
+                <a class="dropdown-item" href="{% url 'create' %}">Create new Todolist</a>
+                <a class="dropdown-item" href="{% url 'List_todo' %}">Views todolist</a>
+                <a class="dropdown-item" href="{% url 'items' %}">create Items todolist</a>
+                <a class="dropdown-item" href="{% url 'items_todo' %}">Views Items todolist</a>
+                <a class="dropdown-item" href="{% url 'add_user' %}">administration</a>
+
+
+
+                <a class="dropdown-item" href="{% url 'LogOut' %}">Logout</a>
+
+            </div>
+        </div>
+    </nav>
+
+</header>
+{% if messages %} {% for msg in messages %}
+<small {% if msg.tags %} class="{{msg.tags}}" {% endif %}>{{msg}}</small> {% endfor %} {% endif %}
+<h1 style="color: pink;">{{name}} Hi you can accesss this application for learning user authentication </h1>
+
+<div class="container-fluid row text-center">
+
+    <ul class="list-group">
+
+        <li class="list-group-item list-group-item-primary">
+            <h6>User Profile</h6>
+        </li>
+        <li class="list-group-item list-group-item-primary">{{request.user.username}}</li>
+        <li class="list-group-item list-group-item-secondary">{{request.user.name}}</li>
+        <li class="list-group-item list-group-item-success">{{request.user.mobile_number}}</li>
+        <li class="list-group-item list-group-item-danger">{{request.user.email}}</li>
+        <li class="list-group-item list-group-item-warning">Performance Improvement Plan</li>
+        <li class="list-group-item list-group-item-dark">KelltonTech Training</li>
+    </ul>
+
+
+    <div class="col-sm-8">
+        {% if users != None %}
+
+        <h4 class="text-center alert alert-info">List of Users</h4>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">First_name</th>
+                    <th scope="col">Last_name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Show_user_detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <!--<th scope="row">{{admin.id}}</th>-->
+
+                    <th>{{user.username}}</th>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.last_name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'Detail' user.id %}">{{user.username}}</a>
+
+                    </td>
+
+
+
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+
+        {% endif %}
+
+        <h4 class="text-center alert alert-info">Hi bro you can play my action Performance</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Create new account</th>
+                    <th scope="col">User Detail</th>
+                    <th scope="col">Create Todo list</th>
+                    <th scope="col">Create Items Todo list</th>
+                    <th scope="col">Edit Profile</th>
+                    <th scope="col">Admin Access User</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <th scope="row"><a class="btn btn-success" href="{% url 'SignUp' %}"><strong>SignUp</strong></a>
+
+                    </th>
+                    <td><a class="btn btn-primary" href="{% url 'Detail' user.id %}">user detail</a>
+                    </td>
+                    <td><a class="btn btn-warning" href="{% url 'create' %}"><strong>Create TodoList</strong></a></td>
+
+                    <td><a class="btn btn-primary" href="{% url 'items' %}"><strong>Create todo_items</strong></a></td>
+                    <td><a class="btn btn-warning" href="{% url 'Edit' %}"><strong>Edit Profile</strong></a></td>
+
+                    </td>
+                    <td> <a class="btn btn-success" href="{% url 'add_user' %}"><strong>Administration</strong></a></td>
+                </tr>
+
+
+            </tbody>
+        </table>
+
+
+        <h4 class="text-center alert alert-warning">Hi {{request.user.first_name}} <strong>Thanku ! for visiting here</strong> </h4>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+{% endblock %}

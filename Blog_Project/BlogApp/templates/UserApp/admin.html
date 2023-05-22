@@ -1,0 +1,166 @@
+{% extends 'UserApp/base.html' %} {% block content %}
+
+
+
+<div style="color: rgb(255, 0, 234);background-color: rgb(168, 181, 185);" class="container border p-4 rounded col-4 mt-4 ">
+    {% if request.user.is_staff %}
+    <h3>
+
+        <a href="http://127.0.0.1:8000/admin/" class="btn btn-success">Admin panel please checkout</a>
+    </h3>
+    {% endif %}
+    <div class="form-control container-fluid">
+
+
+        <h4 class="text-center alert alert-info">Welcome {{request.user.username}} django admin panel</h4>
+
+
+
+
+
+        <h4 class="text-center alert alert-info">Admin Access Only {% if messages %} {% for msg in messages %}
+            <small style="background-color: red; color: rgb(64, 230, 49); padding: 2px 6px; border-radius: 3px;" {% if msg.tags %} class="{{msg.tags}}" {% endif %}>{{msg}}</small> {% endfor %} {% endif %}</h4>
+        {% if request.user.is_staff %}
+        <p>Welcome, admin!</p>
+        <form action="" method="POST" class="px-4 py-3" novalidate>
+            {% csrf_token %} {% if forms.non_field_errors %} {% for error in forms.non_field_errors %}
+            <p class="err background-color red">{{error}}</p>
+            {% endfor %} {% endif %}
+
+
+            <div class="form-group">
+
+                {% for fm in forms %} {{fm.label_tag}} {{fm}} <br> <br>{{fm.errors|striptags}} {% endfor %}
+            </div>
+
+
+            <button type="submit" class="btn btn-success">Save</button>
+
+
+
+
+            <a href="{% url 'Profile' %}" class="btn btn-dark">Back</a>
+
+
+
+        </form>
+        {% else %}
+        <p><span style="color: red"><td>&#10060;</td></span> You can not access this beacuse you are normal user</p>
+        <h4 class="text-center alert alert-info">Welcome {{request.user.username}} Thanks for visting here</h4>
+        <a href="{% url 'Profile' %}" class="btn btn-dark">Back</a> {% endif %} {% if messages %} {% for msg in messages %}
+
+        <small {% if msg.tags %} class="{{msg.tags}}" {% endif %}>{{msg}}</small> {% endfor %} {% endif %}
+
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+<div class="container-fluid  mt-4">
+
+    <div class="justify-content-center">
+        {% if users != None %}
+
+        <h4 class="text-center alert alert-info">List of Users Django administration</h4>
+        {% if request.user.is_staff %}
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Mobili No</th>
+
+                    <th scope="col">Show_user_detail</th>
+                    <th scope="col">Delete User</th>
+                    <th scope="col">Edit User</th>
+                    <th scope="col">views Todolist</th>
+                    <th scope="col">Add TodoList</th>
+                    <th scope="col">Views Items List</th>
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for user in users %}
+                <td>{{request.user.Staff_status}}</td>
+                <tr>
+                    <th scope="row">{{user.id}}</th>
+
+                    <th>{{user.name}}</th>
+                    <td>{{user.email}}</td>
+                    <td>{{user.mobile_number}}</td>
+
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'Detail' user.id %}">{{user.name}}</a>
+
+                    </td>
+                    <td>
+                        <form action="{% url 'delete_user' user.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger btn-sm" value="delete">
+
+                        </form>
+
+                    </td>
+
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'edit_user' user.id %}">edit</a>
+
+                    </td>
+
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'todo_user' user.id %}">todolist</a>
+
+                    </td>
+
+                    <td>
+                        <form action="{% url 'admin_todo_user' user.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger btn-sm" value="add todolist">
+
+                        </form>
+
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'items_todo_user' user.id %}">tItems todolist</a>
+
+                    </td>
+
+                    <td>
+                        <form action="{% url 'admin_items_todo_user' user.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger btn-sm" value="add 1items list">
+
+                        </form>
+                    </td>
+
+
+
+
+
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+        {% else %}
+
+        <h4 class="text-center alert alert-info">You are normal user</h4>
+        {% endif %} {% endif %}
+    </div>
+</div>
+
+
+{% endblock content %}

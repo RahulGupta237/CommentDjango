@@ -1,0 +1,106 @@
+{% extends 'UserApp/base.html' %} {% block content %}
+
+<style>
+    .success {
+        color: green;
+        font-size: medium;
+    }
+</style>
+
+<header style="color: blue;">
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <!-- Navbar content -->
+        <a class="btn btn-primary" href="{% url 'LogOut' %}">LogOut</a>
+
+
+        <h4>Items List of Todo Dashboard</h4>
+
+
+
+
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{request.user.name}}
+    </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'Edit' %}">Edit profile</a>
+                <a class="dropdown-item" href="{% url 'SignUp' %}">Create new account</a>
+                <a class="dropdown-item" href="{% url 'create' %}">Create new Todolist</a>
+                <a class="dropdown-item" href="{% url 'List_todo' %}">Views todolist</a>
+                <a class="dropdown-item" href="{% url 'items' %}">Items todolist</a>
+
+
+                <a class="dropdown-item" href="{% url 'LogOut' %}">Logout</a>
+
+            </div>
+        </div>
+    </nav>
+
+</header>
+{% if messages %} {% for msg in messages %}
+<small {% if msg.tags %} class="{{msg.tags}}" {% endif %}>{{msg}}</small> {% endfor %} {% endif %}
+<h1 style="color: pink;">{{name}} Hi you can see sub task of todolist</h1>
+
+
+
+<div class="col-sm-10">
+    <h1 class="text-white my-5">Dashboard Page</h1>
+    <a href="{% url 'items' %}" class="btn btn-success">Add Items</a>
+    <h4 class="text-center alert alert-info mt-3">Show Todolist information</h4>
+
+    {% if todo_items %}
+    <table class="table table-hover bg-light background-color rounded-circle">
+
+        <thead>
+            <tr class="text-center">
+                <th scope="col" style="width:2%;">ID</th>
+                <th scope="col" style="width:2%;">Title</th>
+                <th scope="col" style="width:2%;">Todo Task</th>
+                <th scope="col" style="width:2%;">Description</th>
+                <th scope="col" style="width:2%;">Added Date</th>
+                <th scope="col" style="width:2%;">Action</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for i in todo_items %}
+            <tr>
+                <th scope="row">{{i.id}}</th>
+                <td>{{i.item_title}}</td>
+                <td>{{i.todo.title}}</td>
+                <td>{{i.description}}</td>
+                <td>{{i.added_date}}</td>
+
+                <td class="text-center">
+                    <a href="{% url 'EditItem' i.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{% url 'DeleteItem' i.id %}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-danger btn-sm" value="delete">
+
+                    </form>
+
+
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+    {% endif %}
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+{% endblock %}

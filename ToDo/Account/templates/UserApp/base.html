@@ -1,0 +1,184 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KelltonTech PIP</title>
+    <link rel="stylesheet" href="{% static 'UserApp/css/bootstrap.min.css' %}">
+
+</head>
+
+<body>
+
+    <div class="container mt-4">
+        <h1 class="text-center alert alert-danger">
+            <p>PIP--> Django ORM mysql restapi Todolist</h1>
+        {% block content %} {% endblock content %}
+    </div>
+
+    <script src="{% static 'UserApp/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'UserApp/js/popper.min.js' %}"></script>
+    <script src="{% static 'UserApp/js/bootstrap.min.js' %}"></script>
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted mt-8 " style="background-color: rgb(201, 182, 182);">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <!-- Left -->
+            <div class="me-5 d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
+            </div>
+            <!-- Left -->
+
+            <div class="text-center p-4" style="background-color: rgba(199, 198, 194, 0.568);">
+                © 2022 Project:
+                <a class="text-reset fw-bold" href="https://github.com/RahulGupta237">projectRahul.com</a>
+            </div>
+
+            <!-- Right -->
+            <div>
+
+                <a href="https://github.com/RahulGupta237" class="me-4 text-reset">
+                    <i class="fab fa-github"> github</i>
+                </a>
+                <a href="https://rahul237.herokuapp.com/" class="me-4 text-reset">
+                    <i class="fab fa-facebook-f">Contact me</i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/rahul-gupta-705249169/" class="me-4 text-reset">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="" style="background-color: rgb(240, 248, 248);">
+            <div class="container text-center text-md-start">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <img src="{% static 'UserApp/images/mypics.png' %}" class="img-thumbnail mt-4 rounded-circle" height="150x" width="250px">
+                        <h6 class="white-text text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>Company name
+                        </h6>
+                        <p>
+                            Hi i am Rahul Gupta Python developer i am working in <span>KelltonTech.</span>
+                            <div class="text-center p-4" style="background-color: hsl(15, 6%, 75%);">
+                                © 2022 Project:
+                                <a class="text-reset fw-bold" href="https://github.com/RahulGupta237">projectRahul.com</a>
+                            </div>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Technology
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Python</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">C</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Django</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Javascript</a>
+
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Machine learning</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Mysql</a>
+                        </p>
+
+                        <p>
+                            <a href="#!" class="text-reset">HTML,CSS bootstrap</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Project
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Ecommerce Website</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">School Management</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">PayTm,Gpay, payment system</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Fraud detection</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Contact
+                        </h6>
+                        <p><i class="fas fa-home me-3"></i> India Azamgarh,276001,Uttar Pradesh</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            <a href="https://rahul237.herokuapp.com/" class="me-4 text-reset">
+               @2022rahul.com
+              </a>
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i> 91+ 6302981453</p>
+                        <p><i class="fas fa-print me-3"></i> 91+ 7084697718</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2021 Copyright:
+            <a class="text-reset fw-bold" href="https://rahul237.herokuapp.com/">Rahul.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+
+</body>
+
+</html>

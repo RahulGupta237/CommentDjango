@@ -1,0 +1,33 @@
+ {% extends 'base.html' %} {% block content %}
+
+<style>
+    .err {
+        color: rgb(211, 51, 46);
+    }
+</style>
+
+
+<div style="color: rgb(27, 27, 29);background-color: rgb(224, 230, 231);" class="container border p-4 rounded col-4 mt-4">
+    <form action="" class="px-4 py-3" method="POST" novalidate>
+        <h1 style="color: hwb(295 25% 37%);" class="text-center">Login</h1>
+        {% csrf_token %} {% if forms.non_field_errors %} {% for error in forms.non_field_errors %}
+        <p class="err">{{error}}</p>
+        {% endfor %} {% endif %}
+        <div class="form-group">
+
+            {% for fm in forms %} {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br> {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign in</button>
+
+    </form>
+
+    {% if messages %} {% for msg in messages %}
+    <small {% if msg.tags %} class="{{msg.tags}}" {% endif %}>{{msg}}</small> {% endfor %} {% endif %}
+    <div class="dropdown-divider"></div>
+
+    <a class="dropdown-item" href="{% url 'account:SignUp' %}">SignUp</a>
+
+</div>
+
+{% endblock %}
